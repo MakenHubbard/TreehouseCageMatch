@@ -12,3 +12,18 @@ const secondRequest = () => {
     myRequest.open("Get",);
     myRequest.send();
 }
+
+const addBattleButtonEventListener = () => {
+    const battle = document.getElementById('smashButt');
+    battle.addEventListener('click', )
+    
+}
+
+function executeThisCodeIfXHRFails () {
+    console.log('error');
+}
+
+function executeThisCodeAfterLoad () {
+    const data = JSON.parse(this.responseText);
+
+}
