@@ -29,9 +29,11 @@ const printToDom = (domString, divId) => {
 const buildPlayerCards = (treeHouseArray) => {
     let domString = "";
     treeHouseArray.forEach((player) => {
-        domString += `<h2>${player.name}</h2>
-                        <img src="${player.gravatar_url}" alt="person" height="200px" width="200px">
-                        <span>${player.points.total}</span>`;
+        domString += `<div class="contestants">
+                        <h2 class="whoAreYou">${player.name}</h2>
+                        <img class="mug-shot" src="${player.gravatar_url}" alt="person" height="200px" width="200px">
+                        <p class="pts">${player.points.total}</p>
+                      </div>`  
     });
     printToDom(domString, 'playCard');
     winnerWinner(treeHouseArray);
@@ -57,11 +59,10 @@ const winnerWinner = (winnerArray) => {
 
 const printWinnerCard = (winner) => {
     let winnerPrintOut = "";
-    winnerPrintOut += `<h2>${winner.name}</h2>`;
+    winnerPrintOut += `<h2><u>${winner.name}</u></h2>`;
         for( let i=0; i<winner.badges.length; i++){
             winnerPrintOut += `<div class="won">
-                                <h3>${winner.badges[i].name}</h3>
-                                <img src="${winner.badges[i].icon_url}">
+                                <img class="badgers" src="${winner.badges[i].icon_url}" alt="badg" width="50px" height="50px">
                             </div>`;
 
         }

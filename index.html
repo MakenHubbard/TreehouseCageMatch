@@ -13,28 +13,29 @@
 
 <body>
     <h1>Treehouse Cage Match</h1>
-    
-        <div class="row">
-            <div class="col-m-6" id="play1">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Player1</span>
-                    <input id="gladiator1" value="xuehuichen" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                </div>
-            </div>
-        <!-- <span id="yesh">attacks with point spear</span> -->
-            <div class="col-m-6" id="play2">
-                <div class="input-group">
-                    <span class="input-group-addon" id="basic-addon1">Player2</span>
-                    <input id="gladiator2" value="aprilnichols"type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-                </div>
+
+    <div class="col-m-6 bigContainer">
+        <div class="row" id="play1">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Player1</span>
+                <input id="gladiator1" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
             </div>
         </div>
-    
+        <!-- <span id="yesh">attacks with point spear</span> -->
+        <div class="row" id="play2">
+            <div class="input-group">
+                <span class="input-group-addon" id="basic-addon1">Player2</span>
+                <input id="gladiator2" type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
+            </div>
+        </div>
+    </div>
+
 
     <button type="button" id="smashButt" class="btn btn-success btn-lg">Battle Royal</button>
     </div>
-
-    <div id="playCard"></div>
+    <div class="col-m-4" id="contestants">
+        <div class="col-m-offset-3" id="playCard"></div>
+    </div>
     <div id="wiener"></div>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
