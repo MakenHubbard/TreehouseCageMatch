@@ -14,12 +14,11 @@ const secondRequest = (player1Data) => {
     anotherRequest.addEventListener("load", successAfterPlayer1Load);
     anotherRequest.open("GET", `https://teamtreehouse.com/${player2}.json`);
     anotherRequest.send();
-        function successAfterPlayer1Load() {
-            const player2Data = JSON.parse(this.responseText);
-            playerArray.push(player1Data,player2Data);
-            buildPlayerCards(playerArray);
-            console.log(playerArray);
-        }
+    function successAfterPlayer1Load() {
+        const player2Data = JSON.parse(this.responseText);
+        playerArray.push(player1Data, player2Data);
+        buildPlayerCards(playerArray);
+    }
 }
 
 const printToDom = (domString, divId) => {
@@ -35,33 +34,38 @@ const buildPlayerCards = (treeHouseArray) => {
                         <span>${player.points.total}</span>`;
     });
     printToDom(domString, 'playCard');
+    winnerWinner(treeHouseArray);
 }
 
 const addBattleButtonEventListener = () => {
     const battle = document.getElementById('smashButt');
     battle.addEventListener('click', firstRequest);
-    winnerWinner();
-    printWinnerCard();
 }
 
 const winnerWinner = (winnerArray) => {
     let winnerString = "";
-    for(let i=0; i<winnerArray; i++){
-       const peeOne = winnerArray[0].points.total;
-       const peeTwo = winnerArray[1].points.total;
-       if (peeOne > peeTwo){
-           return peeOne;
-       } else {
-           return peeTwo;
-       }
-    }
-    printWinnerCard (winnerString, 'wiener')
+    const peeOne = winnerArray[0].points.total;
+    const peeTwo = winnerArray[1].points.total;
+        if (peeOne > peeTwo) {
+            printWinnerCard(winnerArray[0]);
+        } else {
+            printWinnerCard(winnerArray[1]);
+        }
 }
 
 
 
-const printWinnerCard = (winnerString, divId) => {
-    document.getElementById(divId).innerHTML;
+const printWinnerCard = (winner) => {
+    let winnerPrintOut = "";
+    winnerPrintOut += `<h2>${winner.name}</h2>`;
+        for( let i=0; i<winner.badges.length; i++){
+            winnerPrintOut += `<div class="won">
+                                <h3>${winner.badges[i].name}</h3>
+                                <img src="${winner.badges[i].icon_url}">
+                            </div>`;
+
+        }
+    printToDom(winnerPrintOut,'wiener');              
 }
 
 
