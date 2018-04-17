@@ -5,19 +5,18 @@ const startApp = () => {
     myRequest.addEventListener("error", executeThisCodeIfXHRFails);
     myRequest.open("GET", `https://teamtreehouse.com/${player1}.json`);
     myRequest.send();
-    addBattleButtonEventListener(player1Data);
+    addBattleButtonEventListener();
 }
-
-const secondRequest = (player1Data) => {
+let playerArray = [];
+const secondRequest = (player1) => {
     let player2 = document.getElementById('gladiator2').value;
-    let playerArray = [];
     let anotherRequest = new XMLHttpRequest();
     anotherRequest.addEventListener("load", successAfterPlayer1Load);
     anotherRequest.open("GET", `https://teamtreehouse.com/${player2}.json`);
     anotherRequest.send();
-    function successAfterPlayer1Load() {
+    function successAfterPlayer1Load(player1) {
         const player2Data = JSON.parse(this.responseText);
-        playerArray.push(player1Data, player2Data);
+        playerArray.push(player2Data);
         buildPlayerCards(playerArray);
     }
     addBattleButtonEventListener();
@@ -27,17 +26,17 @@ const printToDom = (domString, divId) => {
     document.getElementById(divId).innerHTML = domString;
 }
 
-const buildPlayerCards = (treeHouseArray) => {
+const buildPlayerCards = (playerArray) => {
     let domString = "";
-    treeHouseArray.forEach((player) => {
+    playerArray.forEach((playerArray) => {
         domString += `<div class="contestants">
-                        <h2 class="whoAreYou">${player.name}</h2>
-                        <img class="mug-shot" src="${player.gravatar_url}" alt="person" height="200px" width="200px">
-                        <p class="pts">${player.points.total}</p>
+                        <h2 class="whoAreYou">${playerArray.name}</h2>
+                        <img class="mug-shot" src="${playerArray.gravatar_url}" alt="person" height="200px" width="200px">
+                        <p class="pts">${playerArray.points.total}</p>
                       </div>`
     });
     printToDom(domString, 'playCard');
-    winnerWinner(treeHouseArray);
+    winnerWinner(playerArray);
 }
 
 const addBattleButtonEventListener = () => {
@@ -45,14 +44,13 @@ const addBattleButtonEventListener = () => {
     battle.addEventListener('click', secondRequest);
 }
 
-const winnerWinner = (winnerArray) => {
-    let winnerString = "";
-    const peeOne = winnerArray[0].points.total;
-    const peeTwo = winnerArray[1].points.total;
+const winnerWinner = (playerArray) => {
+    const peeOne = playerArray[0].points.total;
+    const peeTwo = playerArray[1].points.total;
     if (peeOne > peeTwo) {
-        printWinnerCard(winnerArray[0]);
+        printWinnerCard(playerArray[0]);
     } else {
-        printWinnerCard(winnerArray[1]);
+        printWinnerCard(playerArray[1]);
     }
 }
 
@@ -76,12 +74,7 @@ function executeThisCodeIfXHRFails() {
 }
 
 function executeThisCodeAfterLoad() {
-    const player1Data = JSON.parse(this.responseText);
-    //secondRequest(player1Data);
+    const player1 = JSON.parse(this.responseText);
+    playerArray.push(player1);
 }
-
-
-// const startApp = () => {
-//     addBattleButtonEventListener();
-// }
 startApp();
